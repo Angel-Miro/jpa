@@ -1,13 +1,21 @@
 package com.jpamodulospring.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class OrderEntity {
 
     @Id
@@ -28,8 +36,11 @@ public class OrderEntity {
     @Column(length = 32, nullable = false)
     private String clientName;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_bill", nullable = false, unique = true)
     private BillEntity bill;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProductsEntity> products = new ArrayList<>();
 
 }

@@ -1,14 +1,16 @@
 package com.jpamodulospring.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "bill")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class BillEntity {
 
     @Id
@@ -25,7 +27,7 @@ public class BillEntity {
      * Esto es para evitar dependencia circular
      */
 
-    //@ToString.Exclude
-    //@OneToOne(mappedBy = "bill")
-    //private OrderEntity order;
+    @ToString.Exclude
+    @OneToOne(mappedBy = "bill", cascade =  CascadeType.ALL, fetch = FetchType.EAGER)
+    private OrderEntity order;
 }
