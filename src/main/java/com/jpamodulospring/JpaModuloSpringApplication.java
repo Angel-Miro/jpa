@@ -3,10 +3,7 @@ package com.jpamodulospring;
 import com.jpamodulospring.entities.BillEntity;
 import com.jpamodulospring.entities.OrderEntity;
 import com.jpamodulospring.entities.ProductsEntity;
-import com.jpamodulospring.repositories.BillRepository;
-import com.jpamodulospring.repositories.OrderRepository;
-import com.jpamodulospring.repositories.ProductCatalogRepository;
-import com.jpamodulospring.repositories.ProductRepository;
+import com.jpamodulospring.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +28,9 @@ public class JpaModuloSpringApplication implements CommandLineRunner {
 
     @Autowired
     private ProductCatalogRepository productCatalogRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(JpaModuloSpringApplication.class, args);
@@ -71,8 +71,27 @@ public class JpaModuloSpringApplication implements CommandLineRunner {
         products.forEach(product -> product.setOrder(order));
 
         this.orderRepository.save(order);
+
+
         this.productCatalogRepository.findAll().forEach(System.out::println);
+
+
+        // se pobla la tabla muchos a muchos
+        final var HOME = this.categoryRepository.findById(1L).orElseThrow();
+        final var OFFICE = this.categoryRepository.findById(2L).orElseThrow();
+
+        this.productCatalogRepository.findAll().forEach(product -> {
+            if(product.getDescription().contains("home")){
+                product.addCategory(HOME);
+            }
+            if(product.getDescription().contains("office")){
+                product.addCategory(OFFICE);
+            }
+            this.productCatalogRepository.save(product);
+        });
          */
+
+
 
 
     }

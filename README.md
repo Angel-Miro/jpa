@@ -24,3 +24,17 @@
 ![OrphanRemoval.png](src/main/resources/images/OrphanRemoval.png)
 
 ### Relaciones @OneToMany y @OneToOne
+
+
+
+## Anotaciones de JPA :
+- **@Entity:** Marca la clase como una entidad que tendrá su contraparte en una bd
+- **@Table:** Se utiliza para especificar los detalles de una tabla y customizar el nombre de la tabla así como la generación de constraints y creación de índices
+- **@Id:** Indica que el atributo de la clase es la llave primaria de la tabla.
+- **@GeneratedValue:** Especifica la estrategia de la llave primaria
+  - **IDENTITY :** Utiliza el autoincrementable de la BD
+  - **SEQUENCE :** Utiliza la secuencia de la BD
+  - **TABLE :** Utiliza otra tabla para obtener los valores
+  - **UUID :** Utiliza un UUID como llave primaria
+  - **AUTO :** JPA selecciona
+- **@Column:** Se usa para detallar las características del atributo(columna en bd), como el mappeo, longitud, si puede ser nulo, etc
