@@ -14,7 +14,7 @@ public interface ProductCatalogService {
     ProductsCatalogEntity findById(UUID id);
     ProductsCatalogEntity findByName(String name);
     List<ProductsCatalogEntity> findNameLike(String key);
-    List<ProductsCatalogEntity> findNameBetween(BigDecimal min, BigDecimal max);
+    List<ProductsCatalogEntity> findBetweenPrice(BigDecimal min, BigDecimal max);
     List<ProductsCatalogEntity> findByCategoryName(BigInteger id);
     //List<ProductsCatalogEntity> findByLaunchingDate(LocalDate date, DateEval key);
     List<ProductsCatalogEntity> findByBrandAndRating(String brand, Short rating);

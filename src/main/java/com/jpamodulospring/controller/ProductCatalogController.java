@@ -1,14 +1,14 @@
 package com.jpamodulospring.controller;
 
 import com.jpamodulospring.entities.ProductsCatalogEntity;
+import com.jpamodulospring.entities.enums.LikeKey;
 import com.jpamodulospring.service.ProductCatalogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,4 +27,31 @@ public class ProductCatalogController {
     public ResponseEntity<ProductsCatalogEntity> getByName(@PathVariable String name){
         return ResponseEntity.ok(this.productCatalogService.findByName(name));
     }
+
+    @GetMapping(path = "like/{likeKey}")
+    public ResponseEntity<List<ProductsCatalogEntity>> getByNameLike(@PathVariable LikeKey likeKey, @RequestParam String name){
+       final var placeholder = "%";
+
+       if(likeKey.equals(LikeKey.AFTER)){
+           return ResponseEntity.ok(this.productCatalogService.findNameLike(placeholder.concat(name)));
+       }
+
+        if(likeKey.equals(LikeKey.BETWEEN)){
+            return ResponseEntity.ok(this.productCatalogService.findNameLike(placeholder.concat(placeholder.concat(name).concat(placeholder))));
+        }
+
+        if(likeKey.equals(LikeKey.BEFORE)){
+            return ResponseEntity.ok(this.productCatalogService.findNameLike(name.concat(placeholder)));
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping(path = "between")
+    public ResponseEntity<List<ProductsCatalogEntity>> getBetweenPrice(@RequestParam BigDecimal min,
+                                                                 @RequestParam BigDecimal max){
+        return ResponseEntity.ok(this.productCatalogService.findBetweenPrice(min, max));
+    }
+
+
 }
