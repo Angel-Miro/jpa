@@ -26,6 +26,9 @@
 ### Relaciones @OneToMany y @OneToOne
 
 
+## JPA Repositories: 
+![jpa-repositories.png](src/main/resources/images/jpa-repositories.png)
+
 
 ## Anotaciones de JPA :
 - **@Entity:** Marca la clase como una entidad que tendrá su contraparte en una bd

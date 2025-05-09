@@ -1,5 +1,6 @@
 package com.jpamodulospring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jpamodulospring.entities.enums.CodeCategoryEnum;
 import jakarta.persistence.*;
 import lombok.*;
@@ -31,6 +32,7 @@ public class CategoryEntity {
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "categories")
     @ToString.Exclude
+    @JsonIgnore
     private List<ProductsCatalogEntity> productsCatalogs;
 
 }

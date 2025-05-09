@@ -90,9 +90,5 @@ public class JpaModuloSpringApplication implements CommandLineRunner {
             this.productCatalogRepository.save(product);
         });
          */
-
-
-
-
     }
 }
