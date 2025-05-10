@@ -1,7 +1,7 @@
 # JPA [proyecto y documentación]
 
 
-## FetchType: Existen 2 tipos: Es el tipo de carga 
+## FetchType: Son los tipos de carga 
 ![FetchType.png](src/main/resources/images/FetchType.png)
 
 
