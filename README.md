@@ -31,6 +31,9 @@
   https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
 
 ## JPA - Índices
+**@Table(name = "nombre_tabla", indexes = {@Index(name = "idx_product_name", columnList = "product_name")})**
+- **name = "idx_product_name:** Indica el nombre del indice como está en la BD
+- **columnList = "product_name":** Indica el campo(atributo) de la tabla  sobre el cual se aplicará el índice
 
 
 ## JPA Repositories: 

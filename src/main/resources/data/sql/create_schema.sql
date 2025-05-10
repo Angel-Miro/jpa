@@ -55,6 +55,8 @@ CREATE TABLE product_join_category (
     FOREIGN KEY (id_product) REFERENCES products_catalog(id) ON DELETE CASCADE
 );
 
+CREATE INDEX idx_product_name ON products_catalog(product_name);
+
 CREATE OR REPLACE PROCEDURE count_total_products_by_brand(IN brand VARCHAR, OUT response INTEGER)
 LANGUAGE plpgsql
 AS $$
