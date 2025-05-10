@@ -1,6 +1,7 @@
 package com.jpamodulospring.service;
 
 import com.jpamodulospring.entities.ProductsCatalogEntity;
+import com.jpamodulospring.entities.enums.LikeKey;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
@@ -13,7 +14,7 @@ public interface ProductCatalogService {
 
     ProductsCatalogEntity findById(UUID id);
     ProductsCatalogEntity findByName(String name);
-    List<ProductsCatalogEntity> findNameLike(String key);
+    List<ProductsCatalogEntity> findNameLike(LikeKey key, String word);
     List<ProductsCatalogEntity> findBetweenPrice(BigDecimal min, BigDecimal max);
     List<ProductsCatalogEntity> findByCategoryName(BigInteger id);
     //List<ProductsCatalogEntity> findByLaunchingDate(LocalDate date, DateEval key);

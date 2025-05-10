@@ -30,21 +30,7 @@ public class ProductCatalogController {
 
     @GetMapping(path = "like/{likeKey}")
     public ResponseEntity<List<ProductsCatalogEntity>> getByNameLike(@PathVariable LikeKey likeKey, @RequestParam String name){
-       final var placeholder = "%";
-
-       if(likeKey.equals(LikeKey.AFTER)){
-           return ResponseEntity.ok(this.productCatalogService.findNameLike(placeholder.concat(name)));
-       }
-
-        if(likeKey.equals(LikeKey.BETWEEN)){
-            return ResponseEntity.ok(this.productCatalogService.findNameLike(placeholder.concat(placeholder.concat(name).concat(placeholder))));
-        }
-
-        if(likeKey.equals(LikeKey.BEFORE)){
-            return ResponseEntity.ok(this.productCatalogService.findNameLike(name.concat(placeholder)));
-        }
-
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok(this.productCatalogService.findNameLike(likeKey, name));
     }
 
     @GetMapping(path = "between")
