@@ -26,6 +26,13 @@
 ### Relaciones @OneToMany y @OneToOne
 
 
+## JPA - Query Methods 
+**Son las consultas que se realizan con las palabras clave, como las definidas en la documentación de spring**
+  https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+
+## JPA - Índices
+
+
 ## JPA Repositories: 
 ![jpa-repositories.png](src/main/resources/images/jpa-repositories.png)
 
