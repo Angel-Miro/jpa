@@ -1,6 +1,7 @@
 package com.jpamodulospring.service.impl;
 
 import com.jpamodulospring.entities.ProductsCatalogEntity;
+import com.jpamodulospring.entities.enums.DateEval;
 import com.jpamodulospring.entities.enums.LikeKey;
 import com.jpamodulospring.repositories.ProductCatalogRepository;
 import com.jpamodulospring.service.ProductCatalogService;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -65,8 +67,37 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     }
 
     @Override
+    public List<ProductsCatalogEntity> findByLaunchDateBefore(LocalDate date) {
+        return this.productCatalogRepository.findByLaunchDateBefore(date);
+    }
+
+    @Override
+    public List<ProductsCatalogEntity> findByLaunchDateAfter(LocalDate date) {
+        return this.productCatalogRepository.findByLaunchDateAfter(date);
+    }
+
+    @Override
+    public List<ProductsCatalogEntity> findByLaunchDateBoth(DateEval eval, LocalDate date) {
+        if(eval.equals(DateEval.BEFORE)) {
+            return this.productCatalogRepository.findByLaunchDateBefore(date);
+        }else {
+            return this.productCatalogRepository.findByLaunchDateAfter(date);
+        }
+    }
+
+    @Override
     public List<ProductsCatalogEntity> findByBrandAndRating(String brand, Short rating) {
-        return List.of();
+        return this.productCatalogRepository.findByBrandAndRating(brand, rating);
+    }
+
+    @Override
+    public List<ProductsCatalogEntity> findByBrandAndRatingGreaterThan(String brand, Short rating) {
+        return this.productCatalogRepository.findByBrandAndRatingGreaterThan(brand, rating);
+    }
+
+    @Override
+    public List<ProductsCatalogEntity> findByBrandAndRatingLessThan(String brand, Short rating) {
+        return this.productCatalogRepository.findByBrandAndRatingLessThan(brand, rating);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.jpamodulospring.service;
 
 import com.jpamodulospring.entities.ProductsCatalogEntity;
+import com.jpamodulospring.entities.enums.DateEval;
 import com.jpamodulospring.entities.enums.LikeKey;
 import org.springframework.data.domain.Page;
 
@@ -17,8 +18,12 @@ public interface ProductCatalogService {
     List<ProductsCatalogEntity> findNameLike(LikeKey key, String word);
     List<ProductsCatalogEntity> findBetweenPrice(BigDecimal min, BigDecimal max);
     List<ProductsCatalogEntity> findByCategoryName(BigInteger id);
-    //List<ProductsCatalogEntity> findByLaunchingDate(LocalDate date, DateEval key);
+    List<ProductsCatalogEntity> findByLaunchDateBefore(LocalDate date);
+    List<ProductsCatalogEntity> findByLaunchDateAfter(LocalDate date);
+    List<ProductsCatalogEntity> findByLaunchDateBoth(DateEval eval, LocalDate date);
     List<ProductsCatalogEntity> findByBrandAndRating(String brand, Short rating);
+    List<ProductsCatalogEntity> findByBrandAndRatingGreaterThan(String brand, Short rating);
+    List<ProductsCatalogEntity> findByBrandAndRatingLessThan(String brand, Short rating);
     //List<StatisticsProduct> findStatistics();
     Page<ProductsCatalogEntity> findAll(String field, Boolean desc);
     Page<ProductsCatalogEntity> findAllByBrand(String brand);
