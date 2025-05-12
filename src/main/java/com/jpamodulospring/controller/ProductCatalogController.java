@@ -1,10 +1,12 @@
 package com.jpamodulospring.controller;
 
+import com.jpamodulospring.dtos.ReportProduct;
 import com.jpamodulospring.entities.ProductsCatalogEntity;
 import com.jpamodulospring.entities.enums.DateEval;
 import com.jpamodulospring.entities.enums.LikeKey;
 import com.jpamodulospring.service.ProductCatalogService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,5 +76,23 @@ public class ProductCatalogController {
     public ResponseEntity<List<ProductsCatalogEntity>> getByBrandAndRatingLessThan(@RequestParam String brand,
                                                                            @RequestParam Short rating){
         return ResponseEntity.ok(this.productCatalogService.findByBrandAndRatingLessThan(brand, rating));
+    }
+
+    @GetMapping(path = "brand-or-rating")
+    public ResponseEntity<List<ProductsCatalogEntity>> getByBrandOrRating(@RequestParam String brand,
+                                                                           @RequestParam Short rating){
+        return ResponseEntity.ok(this.productCatalogService.findByBrandOrRating(brand, rating));
+    }
+
+    @GetMapping(path = "report-by-brand/{brand}")
+    public ResponseEntity<List<ReportProduct>> getReportByBrand(@PathVariable String brand){
+        return ResponseEntity.ok(this.productCatalogService.findReportByBrand(brand));
+    }
+
+    @GetMapping(path = "find-all-pages")
+    public ResponseEntity<Page<ProductsCatalogEntity>> getAllPage(@RequestParam(required = false) String field,
+                                                                  @RequestParam(required = false) Boolean desc,
+                                                                  @RequestParam Integer page){
+        return ResponseEntity.ok(this.productCatalogService.findAll(field, desc, page));
     }
 }

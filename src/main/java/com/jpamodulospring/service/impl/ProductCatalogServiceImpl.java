@@ -1,5 +1,6 @@
 package com.jpamodulospring.service.impl;
 
+import com.jpamodulospring.dtos.ReportProduct;
 import com.jpamodulospring.entities.ProductsCatalogEntity;
 import com.jpamodulospring.entities.enums.DateEval;
 import com.jpamodulospring.entities.enums.LikeKey;
@@ -8,7 +9,8 @@ import com.jpamodulospring.service.ProductCatalogService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +19,7 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -26,6 +29,8 @@ import java.util.UUID;
 public class ProductCatalogServiceImpl implements ProductCatalogService {
 
     private final ProductCatalogRepository productCatalogRepository;
+
+    private static final int MAX_PAGE =5;
 
     @Override
     public ProductsCatalogEntity findById(UUID id) {
@@ -101,13 +106,20 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     }
 
     @Override
-    public Page<ProductsCatalogEntity> findAll(String field, Boolean desc) {
-        return null;
+    public List<ProductsCatalogEntity> findByBrandOrRating(String brand, Short rating) {
+        return this.productCatalogRepository.findByBrandOrRating(brand, rating);
     }
 
     @Override
-    public Page<ProductsCatalogEntity> findAllByBrand(String brand) {
-        return null;
+    public List<ReportProduct> findReportByBrand(String brand) {
+        return this.productCatalogRepository.findReportByBrand(brand);
+    }
+
+    @Override
+    public Page<ProductsCatalogEntity> findAll(String field, Boolean desc, Integer page) {
+        Sort sort = Sort.by(field);
+        return (desc) ? this.productCatalogRepository.findAll(PageRequest.of(page, MAX_PAGE,sort.descending()))
+                : this.productCatalogRepository.findAll(PageRequest.of(page, MAX_PAGE, sort.ascending()));
     }
 
     @Override

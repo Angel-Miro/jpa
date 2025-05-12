@@ -1,5 +1,6 @@
 package com.jpamodulospring.service;
 
+import com.jpamodulospring.dtos.ReportProduct;
 import com.jpamodulospring.entities.ProductsCatalogEntity;
 import com.jpamodulospring.entities.enums.DateEval;
 import com.jpamodulospring.entities.enums.LikeKey;
@@ -24,9 +25,9 @@ public interface ProductCatalogService {
     List<ProductsCatalogEntity> findByBrandAndRating(String brand, Short rating);
     List<ProductsCatalogEntity> findByBrandAndRatingGreaterThan(String brand, Short rating);
     List<ProductsCatalogEntity> findByBrandAndRatingLessThan(String brand, Short rating);
-    //List<StatisticsProduct> findStatistics();
-    Page<ProductsCatalogEntity> findAll(String field, Boolean desc);
-    Page<ProductsCatalogEntity> findAllByBrand(String brand);
+    List<ProductsCatalogEntity> findByBrandOrRating(String brand, Short rating);
+    List<ReportProduct> findReportByBrand(String brand);
+    Page<ProductsCatalogEntity> findAll(String field, Boolean desc, Integer page);
     Integer countByBrand(String brand);
 
 }

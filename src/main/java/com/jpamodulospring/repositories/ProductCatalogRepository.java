@@ -1,5 +1,6 @@
 package com.jpamodulospring.repositories;
 
+import com.jpamodulospring.dtos.ReportProduct;
 import com.jpamodulospring.entities.ProductsCatalogEntity;
 import com.jpamodulospring.entities.enums.DateEval;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,5 +30,13 @@ public interface ProductCatalogRepository extends JpaRepository<ProductsCatalogE
     List<ProductsCatalogEntity> findByBrandAndRatingGreaterThan(String brand, Short ratingIsGreaterThan);
 
     List<ProductsCatalogEntity> findByBrandAndRatingLessThan(String brand, Short ratingIsLessThan);
+
+    List<ProductsCatalogEntity> findByBrandOrRating(String brand, Short rating);
+
+    @Query("select new com.jpamodulospring.dtos.ReportProduct(" + "pc.brand," +
+                                                                  "avg(pc.price)," +
+                                                                  "sum(pc.price))" +
+            "from ProductsCatalogEntity pc where pc.brand = :brand  group by pc.brand")
+    List<ReportProduct> findReportByBrand(String brand);
 
 }
