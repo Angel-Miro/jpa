@@ -5,6 +5,8 @@ import com.jpamodulospring.entities.ProductsCatalogEntity;
 import com.jpamodulospring.entities.enums.DateEval;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -38,5 +40,8 @@ public interface ProductCatalogRepository extends JpaRepository<ProductsCatalogE
                                                                   "sum(pc.price))" +
             "from ProductsCatalogEntity pc where pc.brand = :brand  group by pc.brand")
     List<ReportProduct> findReportByBrand(String brand);
+
+    @Procedure(procedureName = "count_total_products_by_brand", outputParameterName = "response")
+    Integer countTotalProductByBrand(@Param(value = "brand") String brand);
 
 }

@@ -19,7 +19,6 @@ import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -124,6 +123,6 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
 
     @Override
     public Integer countByBrand(String brand) {
-        return 0;
+        return this.productCatalogRepository.countTotalProductByBrand(brand);
     }
 }

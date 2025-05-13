@@ -95,4 +95,9 @@ public class ProductCatalogController {
                                                                   @RequestParam Integer page){
         return ResponseEntity.ok(this.productCatalogService.findAll(field, desc, page));
     }
+
+    @GetMapping(path = "store-procedure/{brand}")
+    public ResponseEntity<Integer> getTotalProductByBrand(@PathVariable String brand){
+        return ResponseEntity.ok(this.productCatalogService.countByBrand(brand));
+    }
 }
