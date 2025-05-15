@@ -4,10 +4,9 @@ import com.jpamodulospring.dtos.OrderDTO;
 import com.jpamodulospring.service.OrdersCrudService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,6 +18,17 @@ public class OrderController {
     @GetMapping(path = "id/{id}")
     public ResponseEntity<OrderDTO> getOrderById(@PathVariable Long id){
         return ResponseEntity.ok(this.orderCrudService.read(id));
+    }
+
+    @GetMapping(path = "id-custome/{id}")
+    public ResponseEntity<OrderDTO> getOrderByIdCustome(@PathVariable Long id){
+        return ResponseEntity.ok(this.orderCrudService.readCustome(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> addOrders(@RequestBody OrderDTO dto){
+        var path = "order/" + this.orderCrudService.create(dto);
+        return ResponseEntity.created(URI.create(path)).build();
     }
 
 }

@@ -35,9 +35,21 @@
 - **name = "idx_product_name:** Indica el nombre del indice como está en la BD
 - **columnList = "product_name":** Indica el campo(atributo) de la tabla  sobre el cual se aplicará el índice
 
-
 ## JPA Repositories: 
 ![jpa-repositories.png](src/main/resources/images/jpa-repositories.png)
+
+## JPA - Transacciones
+- **@Transactional: Se declara un método o una clase para indicar que debe ser ejecutada dentro de un contexto transaccional, indicando que si existe un error en el proceso las operaciones pueden ser revertidad (Rollback) manteniendo la integridad de los datos**
+
+
+- Propagaciones:
+  - **@Transactional(propagation = Propagation.REQUIRED)** (defualt) : Evalua si hay una transacción activa, si la hay toma ese contexto y continua sino genera una nueva transacción.
+  - **@Transactional(propagation = Propagation.SUPPORTS)** : Si hay una transacción activa toma eL contexto y continua sino todo lo que sigue lo ejecuta fuera de una transacción.
+  - **@Transactional(propagation = Propagation.MANDATORY)** : Si hay una transacción activa toma eL contexto y continua sino lanza una exception, indicando que ese método debe ser ejecutado en un contexto transaccional.
+  - **@Transactional(propagation = Propagation.REQUIRES_NEW)** : Creará una nueva transacción para el metodo que la invoca, suspendiento temporalmente la transacción actual si es que existe
+  - **@Transactional(propagation = Propagation.NOT_SUPPORTED)** : El método se ejecutará simpre sin transacción, si existe una transacción en curso, será suspendida.
+  - **@Transactional(propagation = Propagation.NEVER)** : El método debe ejecutarse sin una transacción. Si existe una transacción en curso, se lanzará una excepción.
+
 
 
 ## Anotaciones de JPA :

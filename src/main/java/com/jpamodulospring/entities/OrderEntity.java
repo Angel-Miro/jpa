@@ -43,4 +43,7 @@ public class OrderEntity {
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductsEntity> products = new ArrayList<>();
 
+    public void addProduct(ProductsEntity product) {
+        this.products.add(product);
+    }
 }
